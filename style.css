@@ -1,0 +1,90 @@
+/* ---------- Colours (edit here) ---------- */
+:root{
+  --burgundy:#5A152B; --wine:#35101D; --rich:#79213D; --ivory:#F8EBDD; --sage:#7d8a6c;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh; color:var(--ivory);
+  font-family:'Cormorant Garamond',Georgia,serif;
+  background:
+    radial-gradient(ellipse at 50% 30%, #6d1b36 0%, var(--burgundy) 35%, var(--wine) 70%, #1c0610 100%) fixed;
+}
+/* subtle grain */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(248,235,221,.05) 1px,transparent 1px);
+  background-size:22px 22px;
+}
+body::after{ /* vignette */
+  content:"";position:fixed;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 45%,rgba(14,2,7,.6) 100%);
+}
+main{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:56px 18px 70px}
+
+header{text-align:center}
+.eyebrow{letter-spacing:.35em;text-transform:uppercase;font-size:.78rem;opacity:.7}
+h1{font-family:'Pinyon Script',cursive;font-weight:400;font-size:clamp(2.6rem,9vw,4rem);margin-top:4px}
+
+/* ---------- Flower ---------- */
+.flower-wrap{
+  position:relative;width:min(80vw,380px);aspect-ratio:400/580;margin-top:10px;
+  cursor:pointer;outline:none;
+  transition:width .8s cubic-bezier(.22,1,.36,1), margin .8s;
+  -webkit-tap-highlight-color:transparent;
+}
+.flower-wrap svg{width:100%;height:100%;position:relative;filter:drop-shadow(0 24px 30px rgba(10,1,5,.6));
+  animation:sway 6s ease-in-out infinite;transform-origin:50% 100%}
+.flower-wrap.opened svg{animation:none}
+.flower-wrap.opened{cursor:default}
+.glow{position:absolute;left:50%;top:38%;width:90%;aspect-ratio:1;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(160,50,85,.42),transparent 65%);filter:blur(14px);
+  animation:breathe 4.5s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-.8deg)}50%{transform:rotate(.8deg)}}
+@keyframes breathe{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(.95)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
+.flower-wrap:focus-visible{outline:1px dashed rgba(248,235,221,.5);outline-offset:8px}
+
+.hint{font-style:italic;font-size:1.25rem;letter-spacing:.06em;opacity:.85;margin-top:-6px;
+  animation:pulse 2.8s ease-in-out infinite;transition:opacity .8s}
+.hint.gone{opacity:0;animation:none;pointer-events:none}
+@keyframes pulse{50%{opacity:.45}}
+
+/* After blooming the flower shrinks to make room for the letter */
+body.bloomed .flower-wrap{width:min(46vw,210px);margin-top:0}
+
+/* ---------- Letter ---------- */
+.letter{
+  width:min(100%,460px);margin-top:18px;padding:30px 26px 34px;text-align:center;
+  background:linear-gradient(#FAF2E6,var(--ivory));color:var(--wine);
+  border-radius:6px;position:relative;
+  box-shadow:0 30px 60px rgba(10,1,5,.6),0 0 0 1px rgba(90,21,43,.5);
+  opacity:0;transform:translateY(40px) scale(.97);filter:blur(6px);
+  transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1),filter .7s ease;
+}
+.letter::before{content:"";position:absolute;inset:8px;border:1px solid rgba(121,33,61,.3);border-radius:3px;pointer-events:none}
+.letter.show{opacity:1;transform:none;filter:none}
+.letter h2{font-family:'Pinyon Script',cursive;font-weight:400;font-size:clamp(2rem,8vw,2.7rem);color:var(--burgundy);margin-bottom:18px}
+.photo{background:#fff;padding:10px 10px 14px;box-shadow:0 8px 22px rgba(53,16,29,.28);transform:rotate(-1.2deg);margin:0 auto 22px;max-width:320px;position:relative}
+.photo img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.photo-fallback{position:absolute;inset:10px 10px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:#eadccb;color:var(--rich);font-style:italic;text-align:center}
+.photo.loaded .photo-fallback{display:none}
+.message p{font-size:1.28rem;line-height:1.55;margin-bottom:.8em}
+.closing{margin-top:22px;font-style:italic;font-size:1.4rem;color:var(--rich);font-weight:500}
+
+/* ---------- Music player ---------- */
+.player{
+  position:fixed;top:12px;right:12px;z-index:10;display:flex;align-items:center;gap:10px;
+  padding:6px 14px 6px 6px;border-radius:40px;
+  background:rgba(53,16,29,.82);backdrop-filter:blur(8px);
+  border:1px solid rgba(248,235,221,.18);box-shadow:0 8px 24px rgba(10,1,5,.5);
+}
+.player button{width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;background:var(--rich);display:grid;place-items:center;transition:background .3s}
+.player button:hover{background:#933051}
+.player svg{width:16px;height:16px;fill:var(--ivory)}
+.track{font-style:italic;font-size:1rem;white-space:nowrap}
+.player input{width:64px;accent-color:#d9b9a0}
+.player.playing .track::after{content:" ♪";opacity:.7}
+@media(max-width:420px){.track{display:none}.player input{width:56px}}
+
+@media(prefers-reduced-motion:reduce){.flower-wrap svg,.glow,.hint{animation:none}}

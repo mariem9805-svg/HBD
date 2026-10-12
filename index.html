@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A flower for you ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- MUSIC PLAYER (file: assets/birthday-song.mp3) -->
+  <div class="player" id="player">
+    <button id="playBtn" type="button" aria-label="Play music">
+      <svg id="iconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg id="iconPause" viewBox="0 0 24 24" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    </button>
+    <span class="track" id="trackLabel">press play ♡</span>
+    <input id="volume" type="range" min="0" max="1" step="0.05" value="0.7" aria-label="Volume">
+  </div>
+  <audio id="song" loop preload="none"><source src="assets/birthday-song.mp3" type="audio/mpeg"></audio>
+
+  <main>
+    <header>
+      <p class="eyebrow">a little something</p>
+      <h1>for you</h1>
+    </header>
+
+    <!-- THE LILY (built by script.js) -->
+    <div class="flower-wrap" id="flowerWrap" role="button" tabindex="0" aria-label="Tap the lily to let it bloom">
+      <div class="glow"></div>
+      <svg id="lily" viewBox="0 0 400 580" overflow="visible"></svg>
+    </div>
+    <p class="hint" id="hint">tap the flower ♡</p>
+
+    <!-- LETTER: stays hidden until the flower has fully bloomed -->
+    <section class="letter" id="letter" hidden aria-hidden="true">
+      <h2>for my favorite girl ♡</h2>
+
+      <!-- REPLACE: put your photo at assets/photo.jpg (or change data-src) -->
+      <figure class="photo">
+        <img id="photo" data-src="assets/photo.jpg" alt="Us together">
+        <div class="photo-fallback" id="photoFallback">add your photo<br><small>assets/photo.jpg</small></div>
+      </figure>
+
+      <!-- EDIT: your message. Each <p> is a paragraph. -->
+      <div class="message">
+        <p>Happy birthday to my favorite girl</p>
+        <p>another year of making memories together to come</p>
+        <p>Thank you for being exactly who you are♡.</p>
+      </div>
+
+      <p class="closing">I'm so lucky to have you in my life.</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
